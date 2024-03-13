@@ -20,8 +20,8 @@ class MapReduceController:
         for t in threads:
             t.join()
 
-        # Salva os resultados intermediários em um arquivo temporário
-        self.save_intermediate_results()
+        # Escreve os resultados intermediários apenas uma vez, após o mapeamento completo
+        self.write_intermediate_results_to_file()
 
         # Inicia uma thread para cada chave e valores intermediários
         reduce_threads = []
@@ -53,8 +53,8 @@ class MapReduceController:
         # Salva o resultado na lista de resultados
         self.intermediate_results[word] = result
 
-    def save_intermediate_results(self):
-        # Salva os resultados intermediários em um único arquivo de texto
+    def write_intermediate_results_to_file(self):
+        # Grava os resultados intermediários em um único arquivo de texto
         with open("intermediate_results.txt", 'w') as f:
             for word, counts in self.intermediate_results.items():
                 f.write(f"{word}: {counts}\n")
@@ -74,6 +74,4 @@ def word_count_reducer(word, counts):
 files = ["text_file_1.txt", "text_file_2.txt", "text_file_3.txt", "text_file_4.txt", "text_file_5.txt"]
 controller = MapReduceController(None, word_count_reducer)
 controller.map_reduce(files)
-
-
 
