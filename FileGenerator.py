@@ -35,7 +35,7 @@ class FileGenerator:
 
 # Exemplo de uso:
 split = 5
-N = 1000
+N = 100000
 alphabet = ['a', 'b', 'c', 'd', 'e']  # Apenas as letras a, b, c, d, e  " alphabet = string.ascii_lowercase """  # Usa todas as letras minúsculas
 min_size = 1
 max_size = 10

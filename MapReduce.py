@@ -39,14 +39,14 @@ class MapReduceController:
 
         # Salva o resultado em um arquivo
         self.save_result(sorted_results)
-
+    # Para cada arquivo na lista de arquivos é criada uma thread que executa a funcao:
     def map_file(self, file_name):
         # Realiza a função map no arquivo
         with open(file_name, 'r') as f:
             words = f.read().splitlines()
             for word in words:
                 self.intermediate_results[word].append(1)
-
+    # Para cada key value intermediarios no dict é criada uma thread que executa a funcao:
     def reduce_wrapper(self, word, counts):
         # Chama a função de redução para a chave e valores intermediários
         result = self.reducer(word, counts)
